@@ -1,7 +1,10 @@
-const express = require('express')
-const { getTopWords } = require('./utils/tags')
-const app = express()
-const rootPostDir = './server/assets/posts'
+const express = require("express");
+const { getTopWords } = require("./utils/tags");
+const cors = require("cors");
+const app = express();
+const rootPostDir = "./server/assets/posts";
+
+app.use(cors());
 
 /**
  *  Returns the detail of an individual post in json, formatted as:
@@ -12,9 +15,9 @@ const rootPostDir = './server/assets/posts'
  *  }
  * }
  */
-app.get('/post/:slug', function (req, res) {
+app.get("/post/:slug", function (req, res) {
   // ... fill in your own code ...
-})
+});
 
 /**
  * Returns a json array of all posts, formatted as:
@@ -26,10 +29,13 @@ app.get('/post/:slug', function (req, res) {
  *  ...
  * ]
  */
-app.get('/posts', function (req, res) {
+app.get("/posts", function (req, res) {
+  res.send("Hello World");
   // ... fill in you own code ...
-})
+});
 
-app.listen(3000, function () {
-  console.log('Dev app listening on port 3000!')
-})
+app.listen(8000, function () {
+  console.log("Dev app listening on port 8000!");
+});
+
+module.exports = app;
