@@ -2,8 +2,8 @@
 
 ## GETTING STARTED
 
-1.) run npm install
-2.) npm run dev to start development server
+- run npm install
+- npm run dev to start development server
 
 ## TESTING
 

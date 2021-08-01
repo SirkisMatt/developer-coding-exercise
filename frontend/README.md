@@ -2,6 +2,6 @@
 
 ## GETTING STARTED
 
-1.) run npm install
-2.) In development, make sure development server is running.
-3.) npm start
+- run npm install
+- In development, make sure development server is running.
+- npm start
