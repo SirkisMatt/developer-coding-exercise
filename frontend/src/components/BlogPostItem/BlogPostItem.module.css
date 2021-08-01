@@ -12,6 +12,10 @@
   font-size: 1.3rem;
 }
 
+.post h1 {
+  font-size: 2rem;
+}
+
 .post figcaption {
   font-style: italic;
   font-size: 1.3rem;

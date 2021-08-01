@@ -11,10 +11,13 @@ const BlogDetails = () => {
   const params = useParams();
   const { slug } = params;
 
+  // custom hook to reuse http request
   const { sendRequest, status, data: loadedPost, error } = useHttp(
     getSinglePost,
     true
   );
+
+  // fetch post with slug => params.slug when page renders
   useEffect(() => {
     sendRequest(slug);
   }, [sendRequest, slug]);

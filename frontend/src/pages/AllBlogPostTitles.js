@@ -1,33 +1,31 @@
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useEffect, useCallback } from "react";
 
 import BlogPostList from "../components/BlogPostList/BlogPostList";
 import NoBlogPosts from "../components/NoBlogPosts/NoBlogPosts";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import useHttp from "../hooks/use-http";
 import { getAllPosts } from "../lib/api";
+import { postTitleActions } from "../store";
 
-const blogPostsMeta = [
-  {
-    title: "title",
-    slug: "title",
-  },
-  {
-    title: "title2",
-    slug: "title2",
-  },
-  {
-    title: "title3",
-    slug: "title3",
-  },
-];
 const AllBlogPostTitles = () => {
+  const dispatch = useDispatch();
+  // clean up title state
+  const setTitleHandler = useCallback(() => {
+    dispatch(postTitleActions.clearTitle());
+  }, [dispatch]);
+
+  // custom hook to reuse http request
   const { sendRequest, status, data: loadedPosts, error } = useHttp(
     getAllPosts,
     true
   );
+
+  // fetch posts on render and clear title
   useEffect(() => {
     sendRequest();
-  }, [sendRequest]);
+    setTitleHandler();
+  }, [sendRequest, setTitleHandler]);
 
   if (status === "pending") {
     return (

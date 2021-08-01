@@ -25,8 +25,11 @@ app.get("/post/:slug", async function (req, res) {
       rootPostDir + "/" + req.params.slug + ".md",
       "utf8"
     );
+
+    // content is after the second "==="
     const content = file.substring(file.indexOf("===\n", 1) + 4);
 
+    // creates array of tags
     const tags = getTopWords(content);
 
     res.status(200).json({
@@ -72,6 +75,8 @@ app.get("/posts", async function (req, res, next) {
           });
           reader.close();
           readable.close();
+
+          // once done formatting posts send response
           index--;
           if (index === 0) {
             res.status(200).json(posts);

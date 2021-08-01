@@ -189,12 +189,15 @@ const stopWords = [
 function getTopWords(str, tagCount = 5) {
   let wordCounts = {};
 
-  str.match(/\w+/g).forEach((w) => {
-    if (!stopWords.includes(w)) {
-      if (wordCounts[w]) wordCounts[w]++;
-      else wordCounts[w] = 1;
-    }
-  });
+  str
+    .toLowerCase()
+    .match(/\w+/g)
+    .forEach((w) => {
+      if (!stopWords.includes(w)) {
+        if (wordCounts[w]) wordCounts[w]++;
+        else wordCounts[w] = 1;
+      }
+    });
   let sortable = [];
   for (var w in wordCounts) {
     sortable.push([w, wordCounts[w]]);
