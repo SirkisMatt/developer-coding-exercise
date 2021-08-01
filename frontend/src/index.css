@@ -20,6 +20,11 @@ code {
   align-items: center;
 }
 
+.focused {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
 .btn {
   text-decoration: none;
   background-color: teal;

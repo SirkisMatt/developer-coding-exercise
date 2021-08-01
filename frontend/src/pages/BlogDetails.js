@@ -1,18 +1,41 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import BlogPostItem from "../components/BlogPostItem/BlogPostItem";
+import NoBlogPosts from "../components/NoBlogPosts/NoBlogPosts";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import useHttp from "../hooks/use-http";
+import { getSinglePost } from "../lib/api";
 
-const blogPost = {
-  title: "title",
-  author: "Author name",
-  content: "...some content...",
-  tags: ["word1", "word2", "word3"],
-};
 const BlogDetails = () => {
   const params = useParams();
   const { slug } = params;
 
-  return <BlogPostItem blogPost={blogPost} />;
+  const { sendRequest, status, data: loadedPost, error } = useHttp(
+    getSinglePost,
+    true
+  );
+  useEffect(() => {
+    sendRequest(slug);
+  }, [sendRequest, slug]);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="centered focused">{error}</p>;
+  }
+
+  if (status === "completed" && !loadedPost.content) {
+    return <NoBlogPosts />;
+  }
+
+  return <BlogPostItem blogPost={loadedPost} />;
 };
 
 export default BlogDetails;

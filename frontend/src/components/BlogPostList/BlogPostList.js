@@ -7,7 +7,11 @@ const BlogPostList = (props) => {
       <h2>Posts</h2>
       <ul className={classes.list}>
         {props.blogPosts.map((blogPost) => (
-          <BlogPostTitle key={blogPost.title} title={blogPost.title} />
+          <BlogPostTitle
+            key={blogPost.slug}
+            title={blogPost.title}
+            slug={blogPost.slug}
+          />
         ))}
       </ul>
     </>

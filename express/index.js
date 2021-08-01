@@ -5,8 +5,6 @@ const cors = require("cors");
 const app = express();
 const rootPostDir = "../assets/posts";
 const readline = require("readline");
-const MarkdownIt = require("markdown-it"),
-  md = new MarkdownIt();
 
 app.use(cors());
 
@@ -19,6 +17,8 @@ app.use(cors());
  *  }
  * }
  */
+
+// Currently works for the happy path
 app.get("/post/:slug", async function (req, res) {
   try {
     const file = await fs.promises.readFile(
@@ -38,8 +38,6 @@ app.get("/post/:slug", async function (req, res) {
   } catch (err) {
     next(err);
   }
-
-  // ... fill in your own code ...
 });
 
 /**
